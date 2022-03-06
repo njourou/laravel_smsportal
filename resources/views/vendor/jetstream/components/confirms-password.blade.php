@@ -1,16 +1,10 @@
 @props(['title' => __('Confirm Password'), 'content' => __('For your security, please confirm your password to continue.'), 'button' => __('Confirm')])
 
 @php
-    $confirmableId = md5($attributes->wire('then'));
+$confirmableId = md5($attributes->wire('then'));
 @endphp
 
-<span
-    {{ $attributes->wire('then') }}
-    x-data
-    x-ref="span"
-    x-on:click="$wire.startConfirmingPassword('{{ $confirmableId }}')"
-    x-on:password-confirmed.window="setTimeout(() => $event.detail.id === '{{ $confirmableId }}' && $refs.span.dispatchEvent(new CustomEvent('then', { bubbles: false })), 250);"
->
+<span {{ $attributes->wire('then') }} x-data x-ref="span" x-on:click="$wire.startConfirmingPassword('{{ $confirmableId }}')" x-on:password-confirmed.window="setTimeout(() => $event.detail.id === '{{ $confirmableId }}' && $refs.span.dispatchEvent(new CustomEvent('then', { bubbles: false })), 250);">
     {{ $slot }}
 </span>
 
@@ -24,12 +18,16 @@
         {{ $content }}
 
         <div class="mt-4" x-data="{}" x-on:confirming-password.window="setTimeout(() => $refs.confirmable_password.focus(), 250)">
-            <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}"
-                        x-ref="confirmable_password"
-                        wire:model.defer="confirmablePassword"
-                        wire:keydown.enter="confirmPassword" />
+            <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}" x-ref="confirmable_password" wire:model.defer="confirmablePassword" wire:keydown.enter="confirmPassword" />
 
             <x-jet-input-error for="confirmable_password" class="mt-2" />
+        </div>
+        <div class="alert alert-default alert-dismissible fade show" role="alert">
+            <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-inner--text"><strong>Default!</strong> This is a default alert—check it out!</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     </x-slot>
 
