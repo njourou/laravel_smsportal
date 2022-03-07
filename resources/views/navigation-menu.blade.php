@@ -16,14 +16,14 @@
                         {{ __('Home') }}
                     </x-jet-nav-link>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                            {{ __('Balance') }}
+                        <x-jet-nav-link href="https://docs.wasiliana.com/#introduction" :active="request()->routeIs('dashboard')">
+                            {{ __('Docs') }}
                         </x-jet-nav-link>
                     </div>
                 </div>
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class=" hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                 <div class="ml-3 relative">
